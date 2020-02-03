@@ -397,8 +397,8 @@ void menuLista()
                     printf("Lista Vazia. Adicione elementos\n");
                     break;
                 }
-                
-                //printf("Valor retirado foi %d\n",valor);
+                valor=removeFim(line);
+                printf("Valor retirado foi %d\n",valor);
                 break;
 
             case 7:
@@ -408,8 +408,15 @@ void menuLista()
                     printf("Lista Vazia. Adicione elementos\n");
                     break;
                 }
-                
-                //printf("Valor retirado foi %d\n",valor);
+                printf("Posição: ");
+                scanf("%d",&pos);
+                if (pos>=line->tam || pos<0 )
+                {
+                    printf("Posição inválida\n");
+                    break;
+                }
+                valor=removePosicao(line,pos);
+                printf("Valor retirado foi %d\n",valor);
                 break;
             
             case 8:
@@ -538,6 +545,7 @@ int removeInicio(lista* l)
     l->inicio=aux->prox;
     free(aux);
     aux=NULL;
+    l->tam--;
     return valor;  
 }
 
@@ -572,6 +580,46 @@ void inserirPosicao(lista* l,int valor,int pos)
     l->tam++;
 }
 
+int removeFim(lista* l)
+{
+    obj *item = l->inicio;
+    obj * anterior;
+    while(item->prox!=NULL)
+    {   
+        anterior=item;
+        item=item->prox;
+    }
+    anterior->prox=NULL;
+    int valor = item->item;
+    free(item);
+    l->tam--;
+    return valor;
+}
+
+int removePosicao(lista* l,int pos)
+{
+    obj *item = l->inicio;
+    obj * anterior;
+    int valor;
+    
+    if(pos==(l->tam-1))
+    {
+        valor=removeFim(l);
+        return valor;
+    }
+    for (int i = 0; i < pos; i++)
+    {   
+        anterior=item;
+        item=item->prox;
+    }
+    anterior->prox=item->prox;
+    item->prox->ant=anterior;
+    valor=item->item;
+    l->tam--;
+    free(item);
+
+    return valor;
+}
 
 
 
