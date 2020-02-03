@@ -69,5 +69,30 @@ void imprimeLista(lista* l);
 void liberaLista(lista* l);
 
 void menuLista();
+//LISTA DUPLAMENTE ENCADEADA
+
+//ÁRVORE
+typedef struct _no2{
+    int item;
+    struct _no2 *esq;
+    struct _no2 *dir;
+}no2;
+
+typedef struct _arvore{
+    no2 *raiz;
+}arvore;
+
+arvore* criarArvore();
+void criarRaiz(arvore* a);
+int vaziaArvore(arvore* a);
+void inserirEsquerda(no* n, int valor);
+void inserirDireita(no* n, int valor);
+void liberaArvore(arvore *a);
+void bfs(arvore* a);
+void dfs(arvore* a);
+
+void menuArvore();
+
+//Árvore
 
 #endif

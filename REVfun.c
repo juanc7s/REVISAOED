@@ -30,7 +30,7 @@ void menu()
             
             case 4:
                 system("clear");
-                //menuArvore()
+                menuArvore();
                 break;
 
             case 5:
@@ -426,8 +426,10 @@ void menuLista()
                     printf("Lista Vazia. Adicione elementos\n");
                     break;
                 }
-                
-                //printf("Valor retirado foi %d\n",valor);
+                printf("Valor a ser retirado: ");
+                scanf("%d",&valor);
+                valor=removeChave(line,valor);
+                printf("Valor retirado foi %d\n",valor);
                 break;
 
             case 9:
@@ -621,7 +623,124 @@ int removePosicao(lista* l,int pos)
     return valor;
 }
 
+int removeChave(lista* l,int valor)
+{
+    obj* aux = l->inicio;
+    obj* anterior;
+    int cont=0;
+    while(aux!=NULL && aux->item!=valor)
+    {   
+        anterior=aux;
+        aux=aux->prox;
+        cont++;
+    }
 
+    if(cont==0)
+    {
+        valor=removeInicio(l);
+        return valor;
+    }
+    
+    if(aux->item==valor && aux->prox==NULL) 
+    {
+        valor=removeFim(l);
+        return valor;
+    }
 
+    if(aux->prox!=NULL)
+    {   
+        anterior->prox=aux->prox;
+        aux->prox->ant=anterior;
+        free(aux);
+        l->tam--;
+        return valor;
 
+    }
+    printf("Valor não encontrado\n");
+    return 3550;
+}
 //LISTA DUPLAMENTE ENCADEADA
+
+//ÁRVORE
+void menuArvore()
+{
+    int op;
+    int valor;
+    no2* raizi = (no2*)malloc(sizeof(no2));
+    arvore* tree;
+    tree = criarArvore();
+    while(1)
+    {   
+        //dfs(tree);
+        //bfs(tree);
+        printf("1: Verificar se está vazia\n2: Inserir\n3: retirar\n4: Sair e apagar Árvore\nOpção: ");
+        scanf("%d",&op);
+        switch (op)
+        {   
+            case 1:
+                system("clear");
+
+                if(vaziaArvore(tree)==1)
+                {
+                    printf("Árvore Vazia\n");
+                    break;
+                }
+                printf("Árvore com elementos\n");
+                break;
+
+            case 2:
+                system("clear");
+                printf("Valor: ");
+                scanf("%d",&valor);
+                if(vaziaArvore(tree)==1)
+                {
+                    raizi;
+                    break;
+                }
+                
+                break;
+            
+            case 3:
+                system("clear");
+                if(vaziaArvore(tree)==1)
+                {
+                    printf("Arvore Vazia. Adicione elementos\n");
+                    break;
+                }
+                
+                printf("Valor desenfileirado foi %d\n",valor);
+                break;
+
+            case 4:
+                system("clear");
+                
+                return;
+            
+            
+            default:
+                system("clear");
+                printf("Opção inválida\n");
+                break;
+        }
+    }   
+}
+
+arvore* criarArvore()
+{
+    arvore* tree = (arvore*)malloc(sizeof(arvore));
+    if (tree==NULL)
+    {
+        printf("Sem memória\n");
+        exit(1);
+    }   
+    tree->raiz=NULL;
+    return tree;
+    
+}
+
+int vaziaArvore(arvore* a)
+{
+    return (a->raiz==NULL);
+}
+
+//ÁRVORE
