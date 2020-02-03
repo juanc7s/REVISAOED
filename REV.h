@@ -83,7 +83,7 @@ typedef struct _arvore{
 }arvore;
 
 arvore* criarArvore();
-void criarRaiz(arvore* a);
+void criarRaiz(arvore* a,int valor);
 int vaziaArvore(arvore* a);
 void inserirEsquerda(no* n, int valor);
 void inserirDireita(no* n, int valor);

@@ -666,7 +666,6 @@ void menuArvore()
 {
     int op;
     int valor;
-    no2* raizi = (no2*)malloc(sizeof(no2));
     arvore* tree;
     tree = criarArvore();
     while(1)
@@ -694,7 +693,7 @@ void menuArvore()
                 scanf("%d",&valor);
                 if(vaziaArvore(tree)==1)
                 {
-                    raizi;
+                    criarRaiz(tree,valor);
                     break;
                 }
                 
@@ -741,6 +740,37 @@ arvore* criarArvore()
 int vaziaArvore(arvore* a)
 {
     return (a->raiz==NULL);
+}
+
+void criarRaiz(arvore* a,int valor)
+{
+    arv->raiz = (no2*)malloc(sizeof(no2));
+    if (arv->raiz==NULL)
+    {
+        printf("Sem memória\n");
+        exit(1);
+    }   
+    if(arv->raiz != NULL)
+    {
+        arv->raiz->dir=NULL;
+        arv->raiz->esq=NULL;
+        arv->raiz->item = valor;
+    }
+}
+
+void bfs(arvore* a)
+{
+    fila* q = (fila*)malloc(sizeof(fila));
+    int atual;
+    enfileirar(q,arvore->raiz->item);
+    while(!vaziaFila(q))
+    {
+        atual = desenfileirar(q);
+        if (raiz->esq!=NULL)
+        {
+            
+        }
+    }
 }
 
 //ÁRVORE
